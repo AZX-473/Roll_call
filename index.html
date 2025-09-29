@@ -4,164 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>班级点名系统</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Microsoft YaHei', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            color: white;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            color: #fff;
-        }
-
-        .display-area {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            padding: 40px;
-            margin: 30px 0;
-            position: relative;
-            overflow: hidden;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #nameDisplay {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: #ffcc00;
-            text-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
-            transition: all 0.1s ease;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        button {
-            padding: 15px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        #startBtn {
-            background: linear-gradient(to right, #00b09b, #96c93d);
-            color: white;
-        }
-
-        #startBtn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        #startBtn:disabled {
-            background: #555;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        #stopBtn {
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
-            color: white;
-        }
-
-        #stopBtn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        #stopBtn:disabled {
-            background: #555;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .student-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 30px;
-        }
-
-        .student-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .student-card.selected {
-            background: rgba(255, 204, 0, 0.3);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
-        }
-
-        footer {
-            margin-top: 40px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        /* 动画效果 */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .pulse {
-            animation: pulse 0.5s infinite;
-        }
-
-        @keyframes flash {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        .flash {
-            animation: flash 0.2s infinite;
-        }
-    </style>
+    <link rel="stylesheet" href="Roll_call/style.css">
 </head>
 <body>
 <div class="container">
@@ -176,112 +19,27 @@
         <button id="stopBtn" disabled>停止</button>
     </div>
 
+    <div class="student-section-title">学生名单</div>
     <div class="student-list" id="studentList">
         <!-- 学生列表将由JavaScript动态生成 -->
     </div>
 </div>
 
 <footer>
-    Made by <a href="https://azx-473.github.io/AZX_473.github.io/">AZX</a>
+    Made by <a href="https://azx-473.github.io/AZX_473.github.io/" target="_blank">AZX</a>
 </footer>
 
-<script>
-    // 学生名单数据
-    const students = [
-        "孙雨欣","韩馨雨","杜艺嘉乐","李致远","董洁","王嘉轩","常艺凡","杲奕然","王雨涵","王若涵","徐瀚霖","姚佳成","兰文博","乔士轩","郭子茹","郝梦薇","孙斌凯","张新烨","徐竟源","王子墨","刘雪菲","王烁奇","靳晨瑞","张嘉佑","王雨晴","陈发昊","刘爱雯","宋甲一","王子童","刘海萱","李思瑶","何仔语","王运泽","吴雨薇","谢佳録","耿浩天","陈姚妡","姜宇泽","王怡惠","武则润","宋梓琪","张思语","王伟晔","沈永恒","郎丽荣","闫伟泰","孙贞羲","刘雨晴","吴欣烨","李苛欣","张清硕","郭佳洲","赵紫茹","王逸轩","姚雨婷"
-    ];
+<!-- 新增：主题选择容器，固定在右下角 -->
+<div class="theme-selector-container">
+    <span class="theme-selector-title">选择主题:</span>
+    <!-- !!! 修改了 id="themeSelector" 为 id="theme-selector" !!! -->
+    <select id="theme-selector" class="theme-selector">
+        <!-- 主题选项将由 JavaScript 动态生成 -->
+        <option value="">加载中...</option>
+    </select>
+</div>
 
-    // 过滤掉空名字
-    const validStudents = students.filter(name => name.trim() !== "");
 
-    let isRolling = false;
-    let rollInterval;
-    let currentIndex = -1;
-    let speed = 80; // 初始速度（毫秒）
-    let speedAcceleration = 0; // 速度加速计数器
-
-    // 初始化学生列表
-    function initStudents() {
-        const container = document.getElementById('studentList');
-        students.forEach((name, index) => {
-            if (name.trim() !== "") {
-                const card = document.createElement('div');
-                card.className = 'student-card';
-                card.textContent = name;
-                card.dataset.index = index;
-                container.appendChild(card);
-            }
-        });
-    }
-
-    // 开始点名
-    function startRoll() {
-        if (isRolling) return;
-
-        isRolling = true;
-        document.getElementById('startBtn').disabled = true;
-        document.getElementById('stopBtn').disabled = false;
-        document.getElementById('nameDisplay').classList.add('flash');
-
-        // 重置速度参数
-        speed = 0;
-        speedAcceleration = 0;
-
-        rollInterval = setInterval(() => {
-            // 随机选择一个学生（过滤掉空名字）
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * students.length);
-            } while (students[randomIndex].trim() === "");
-
-            currentIndex = randomIndex;
-            document.getElementById('nameDisplay').textContent = students[currentIndex];
-
-            // 更新卡片高亮
-            document.querySelectorAll('.student-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-
-            const selectedCard = document.querySelector(`.student-card[data-index="${currentIndex}"]`);
-            if (selectedCard) {
-                selectedCard.classList.add('selected');
-            }
-
-            // 逐渐加速效果
-            speedAcceleration++;
-            if (speedAcceleration > 20 && speed > 20) {
-                speed -= 2;
-                clearInterval(rollInterval);
-                rollInterval = setInterval(arguments.callee, speed);
-            }
-        }, speed);
-    }
-
-    // 停止点名
-    function stopRoll() {
-        if (!isRolling) return;
-
-        clearInterval(rollInterval);
-        isRolling = false;
-        document.getElementById('startBtn').disabled = false;
-        document.getElementById('stopBtn').disabled = true;
-        document.getElementById('nameDisplay').classList.remove('flash');
-        document.getElementById('nameDisplay').classList.add('pulse');
-
-        // 3秒后停止脉冲动画
-        setTimeout(() => {
-            document.getElementById('nameDisplay').classList.remove('pulse');
-        }, 3000);
-    }
-
-    // 绑定事件
-    document.getElementById('startBtn').addEventListener('click', startRoll);
-    document.getElementById('stopBtn').addEventListener('click', stopRoll);
-
-    // 页面加载时初始化
-    window.onload = initStudents;
-</script>
+<script src="Roll_call/script.js"></script>
 </body>
-
 </html>
-
