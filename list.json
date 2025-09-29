@@ -1,0 +1,38 @@
+[
+  {
+    "themeName": "深邃海洋",
+    "backgroundColor": "linear-gradient(135deg, #0D4C92, #74B9FF, #00CEC9)",
+    "containerBackgroundColor": "rgba(0, 0, 0, 0.7)",
+    "displayAreaBackgroundColor": "linear-gradient(45deg, #043A76, #022447)",
+    "displayAreaBorderColor": "rgba(116, 185, 255, 0.7)",
+    "nameDisplayColor": "#f1f2f6",
+    "nameDisplaySize": "5rem",//4.2
+    "startBtnBackground": "linear-gradient(135deg, #00B8D4, #00E5FF)",
+    "startBtnBorderColor": "rgba(0, 229, 255, 0.5)",
+    "stopBtnBackground": "linear-gradient(135deg, #FF8800, #FFB300)",
+    "stopBtnBorderColor": "rgba(255, 179, 0, 0.5)",
+    "studentCardBackground": "rgba(255, 255, 255, 0.12)",
+    "studentCardBorderColor": "rgba(255, 255, 255, 0.25)",
+    "studentCardSelectedBackground": "rgba(255, 179, 0, 0.8)",
+    "studentCardSelectedBorderColor": "rgba(255, 179, 0, 0.8)",
+    "footerBackgroundColor": "rgba(13, 76, 146, 0.4)"
+  },
+  {
+    "themeName": "初音未来",
+    "backgroundColor": "url('https://cdn.luogu.com.cn/upload/image_hosting/l5roxdzm.png')",
+    "containerBackgroundColor": "rgba(35, 37, 38, 0.9)",
+    "displayAreaBackgroundColor": "linear-gradient(135deg, rgba(225, 75, 120, 0.8), rgba(23, 208, 180, 0.8))",
+    "displayAreaBorderColor": "rgba(255, 255, 255, 0.4)",
+    "nameDisplayColor": "#ffffff",
+    "nameDisplaySize": "5rem",//4
+    "startBtnBackground": "linear-gradient(135deg, #17D0B4, #E14B78)",
+    "startBtnBorderColor": "rgba(23, 208, 180, 0.5)",
+    "stopBtnBackground": "linear-gradient(135deg, #E14B78, #232526)",
+    "stopBtnBorderColor": "rgba(225, 75, 120, 0.5)",
+    "studentCardBackground": "rgba(255, 255, 255, 0.1)",
+    "studentCardBorderColor": "rgba(255, 255, 255, 0.2)",
+    "studentCardSelectedBackground": "rgba(225, 75, 120, 0.7)",
+    "studentCardSelectedBorderColor": "rgba(225, 75, 120, 0.7)",
+    "footerBackgroundColor": "rgba(35, 37, 38, 0.5)"
+  }
+]

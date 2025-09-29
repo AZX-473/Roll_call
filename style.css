@@ -1,0 +1,373 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Microsoft YaHei', sans-serif; /* 推荐的中文微软雅黑 */
+}
+
+body {
+    /* background will be set by theme, handled here for cover properties */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: white;
+    font-size: 64px;
+    position: relative; /* Needed for absolutely positioned elements within body if any */
+
+    /* Background properties - applied here to ensure 'cover' works for the entire page */
+    /* The actual URL and color will be set by script.js or inline styles for themes */
+    background-size: cover !important; /* Use !important to ensure these override other potential styles */
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-attachment: fixed !important; /* Key for a fixed background */
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    /* background will be set by theme */
+    border-radius: 20px;
+    padding: 40px 50px; /* Keep padding for inner content */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* Helps contain floats and shadows */
+    /* Removed background properties from here, as they are now on body */
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
+    /* background-position: center; */
+    /* background-attachment: fixed; */
+    /* margin: 0; This was added in your snippet, but may interfere with body centering */
+    /* padding: 0; This was also added, and may interfere with content padding defined above. Removed. */
+}
+
+h1 {
+    font-size: 3.2rem;
+    margin-bottom: 30px;
+    /* text-shadow: 0 0 15px rgba(255, 255, 255, 0.6); */ /* Added back your original shadow */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+/* 点名显示区域 */
+.display-area {
+    border-radius: 15px;
+    padding: 60px 40px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 250px; /* Increased min-height to accommodate potentially larger fonts */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 随机抽人 & 随机后的名字显示 */
+#nameDisplay {
+    font-weight: bolder;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+
+    /*
+       Key change: Making the font-size approximate H1 size.
+       We'll use the CSS variable from JS for flexibility,
+       but provide a generous clamp as a fallback and for responsive scaling.
+    */
+    /* Adjustments:
+       - Increased min font-size for better readability on small screens.
+       - Increased preferred and max font-size to approximate H1.
+       - The viewport width unit (vw) helps it scale.
+    */
+    font-size: clamp(2rem, var(--name-display-size, 6vw), 6rem); /* Significantly increased sizes */
+
+    /*
+       Explanation of clamp(min, preferred, max):
+       min: The smallest font size it will ever be (now 2rem, which is quite large).
+       preferred: The ideal font size, derived from script.js's --name-display-size.
+                  If not set, it defaults to 6vw. This value is also larger and will make
+                  the font grow more aggressively with screen width.
+       max: The largest font size it will ever be (now 6rem, which is very large).
+    */
+
+    /* Optional: Media queries for finer control on smaller screens if the above is too large */
+    @media (max-width: 768px) {
+        font-size: clamp(1.8rem, var(--name-display-size, 7vw), 5rem); /* Still large, but slightly scaled down for tablets */
+    }
+    @media (max-width: 480px) {
+        font-size: clamp(1.5rem, var(--name-display-size, 9vw), 4rem); /* Optimized for phones */
+    }
+}
+
+
+/* 控制按钮区域 */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+    width: 100%;
+}
+
+button {
+    padding: 18px 50px;
+    border-radius: 60px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.4s ease-out;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+}
+
+#startBtn, #stopBtn {
+    /* background and border color set by theme */
+    color: #0a1128; /* This color might be too specific; use a CSS variable if possible */
+}
+
+#startBtn:hover, #stopBtn:hover {
+    transform: translateY(-5px) scale(1.05);
+}
+
+#startBtn:disabled, #stopBtn:disabled {
+    background: #444;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+/* 学生列表区域 */
+.student-section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 25px;
+    color: #e0f7fa;
+    text-shadow: 0 2px 8px rgba(224, 247, 250, 0.3);
+}
+
+.student-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+.student-card {
+    padding: 15px 10px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-size: 1.1rem;
+    font-weight: 500;
+    /* background and border color set by theme */
+}
+
+.student-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    /* background and color set by theme */
+}
+
+.student-card.selected {
+    /* background and border color set by theme */
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.8);
+    font-weight: bold;
+    /* color set by theme */
+}
+
+/* 底部信息 */
+footer {
+    margin-top: 50px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    /* background will be set by theme */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffcc00;
+    text-decoration: underline;
+}
+
+/* Theme Selector Container - now styled as a "bubble" that appears to "float up" */
+.theme-selector-container {
+    position: fixed; /* Fixed position */
+    top: 25px;       /* Moved from bottom to top */
+    right: 25px;     /* Align to the right */
+    z-index: 100;    /* Ensure it's on top */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the container bubble */
+    padding: 8px 15px; /* Pad the bubble */
+    border-radius: 30px; /* More rounded/bubble-like */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow for floating effect */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition for "floating up" */
+}
+
+.theme-selector-container:hover {
+    top: 15px;       /* Float up slightly when hovered */
+    background: rgba(0, 0, 0, 0.85); /* Darken slightly on hover */
+}
+
+.theme-selector-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #e0f7fa; /* Consistent title color */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.theme-selector {
+    /* --- MODIFICATION FOR SELECT TEXT VISIBILITY --- */
+    padding: 12px 20px;
+    border: none; /* Removed default border */
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.2); /* Default background */
+    color: white !important; /* Force white text color for visibility */
+    appearance: none; /* Remove default browser styles */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* If you want to make the background color of select follow theme, */
+    /* you'll need to set it dynamically in script.js or use CSS variables applied by JS. */
+    /* For now, this ensures text is visible. */
+    /* ----------------------------------------------------- */
+}
+
+.theme-selector:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Animation for floating effect on hover */
+/* No change needed in animation itself, just how it's applied via top/bottom */
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.pulse {
+    animation: pulse 0.7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes flash {
+    0% { opacity: 1; text-shadow: 0 0 15px rgba(255, 255, 255, 0.7); }
+    50% { opacity: 0.7; text-shadow: 0 0 30px rgba(255, 255, 255, 1); }
+    100% { opacity: 1; text-shadow: 0 0 15px rgba(255, 255, 255, 0.7); }
+}
+
+.flash {
+    animation: flash 0.3s linear infinite;
+}
+
+/* Responsive adjustments */
+@media (min-width: 1024px) {
+    .container {
+        padding: 50px 80px;
+        max-width: 1500px;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    .display-area {
+        padding: 70px 50px;
+        min-height: 250px;
+    }
+
+    .controls button {
+        padding: 20px 60px;
+        font-size: 1.5rem;
+    }
+
+    .student-section-title {
+        font-size: 2rem;
+    }
+
+    .student-list {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 20px;
+    }
+
+    .student-card {
+        padding: 18px 15px;
+        font-size: 1.2rem;
+    }
+
+    footer {
+        margin-top: 60px;
+        font-size: 1.2rem;
+    }
+
+    /* Adjust theme selector position for larger screens */
+    .theme-selector-container {
+        top: 30px;       /* Increased top padding for larger screens */
+        right: 30px;     /* Increased right padding */
+    }
+    .theme-selector-container:hover {
+        top: 20px;       /* Float up more on larger screens */
+    }
+}
+
+/* --- ADDITIONAL RESPONSIVE ADJUSTMENTS FOR NAME DISPLAY SIZE --- */
+/* These will override the default font-size on #nameDisplay */
+
+@media (max-width: 1200px) { /* Tablets and smaller desktops */
+    #nameDisplay {
+        font-size: 3.5rem; /* Slightly smaller on larger tablets/desktops */
+    }
+}
+
+@media (max-width: 992px) { /* Larger tablets */
+    #nameDisplay {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) { /* Standard tablets */
+    #nameDisplay {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) { /* Smaller tablets and phones */
+    #nameDisplay {
+        font-size: 2rem;
+    }
+}
+/* --- END ADDITIONAL RESPONSIVE ADJUSTMENTS --- */
